@@ -6,12 +6,12 @@ class MarsRover : public Rover
 {
 public:
   /**
-   * @brief MarsRover Default constructor   \todo {Make check for Rule of 5}
+   * @brief MarsRover Default constructor
    */
   MarsRover();
 
   /**
-   * @brief ~Rover Virtual destructor  \todo {Make check for Rule of 5}
+   * @brief ~Rover Virtual destructor
    */
   ~MarsRover();
 

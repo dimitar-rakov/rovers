@@ -23,12 +23,32 @@ class Controller{
 public:
 
   /**
-   * @brief Controller Default constructor   \todo {Make check for Rule of 5}
+   * @brief Controller Default constructor
    */
   Controller();
 
   /**
-   * @brief ~Controller Virtual destructor  \todo {Make check for Rule of 5}
+   * @brief Controller Copy constructor not alowed
+   */
+  Controller(const Controller& controller) =delete;
+
+  /**
+   * @brief Controller Move constructor not alowed
+   */
+  Controller(Controller&& controller) =delete;
+
+  /**
+   * @brief Controller Copy assignment not alowed
+   */
+  Controller& operator=(const Controller& controller)=delete;
+
+  /**
+   * @brief Controller Move assignment not alowed
+   */
+  Controller& operator=(Controller&& controller)=delete;
+
+  /**
+   * @brief ~Controller Virtual destructor
    */
   virtual ~Controller();
 
@@ -43,18 +63,9 @@ public:
   /**
    * @brief init Set initial Parameter has to be run once before controller start
    * @param initPose Initial pose
-   * @param lowerLeftCorner Lower left corner of the map
-   * @param upperRightCorner Upper right corner of the map
    * @return true if successed
    */
-  inline bool init(navigation::Pose initPose,
-                   navigation::Position lowerLeftCorner,
-                   navigation::Position upperRightCorner)
-  {
-    msrPose_ = initPose;
-    lowerLeftCorner_ = lowerLeftCorner;
-    upperRightCorner_ = upperRightCorner;
-  }
+  inline bool init(navigation::Pose initPose){msrPose_ = initPose;}
 
   /**
    * @brief msrPose Return current pose
@@ -75,10 +86,23 @@ public:
   inline motion_status motionStatus(){return motionStatus_;}
 
   /**
+   * @brief calcNewPose Calculate a new pose
+   * @param desDirection Desired direction
+   * @return New pose
+   */
+  navigation::Pose calcNewPose(const navigation::direction &desDirection);
+
+  /**
    * @brief moveTo Move to a desiredDirection
    * @param desiredDirection Desired direction
    */
   virtual void moveTo(const navigation::direction &desiredDirection);
+
+  /**
+   * @brief moveTo Move to a desiredPose
+   * @param desiredDirection Desired pose
+   */
+  virtual void moveTo(const navigation::Pose &desPose);
 
  protected:
   /// Controller status
@@ -87,32 +111,8 @@ public:
   /// Movement status
   motion_status motionStatus_;
 
-  /// Upper right corner of the grid map
-  navigation::Position lowerLeftCorner_;
-
-  /// Upper right corner of the grid map
-  navigation::Position upperRightCorner_;
-
   /// Measured pose
   navigation::Pose msrPose_;
-
-  /**
-   * Check if the desPose is in the map \todo {bind the variable in doxygen}
-   * @return true if in range
-   */
-  inline bool checkLimits(const navigation::Pose &desPose){
-    return desPose.pos.x>=lowerLeftCorner_.x && desPose.pos.x<=upperRightCorner_.x &&
-           desPose.pos.y>=lowerLeftCorner_.y && desPose.pos.y<=upperRightCorner_.y;
-}
-
-
-  /**
-   * @brief calcNewPose Calculate a new pose \todo {eventualy public}
-   * @param desDirection Desired direction
-   * @return New pose
-   */
-  navigation::Pose calcNewPose(const navigation::direction &desDirection);
-
 
 };
 } // end of namespace controllers

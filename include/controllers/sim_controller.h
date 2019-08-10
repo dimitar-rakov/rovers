@@ -17,8 +17,17 @@ public:
    */
   virtual ~SimController();
 
-  /// Overload
+  /**
+   * @brief moveTo Move to a desiredDirection
+   * @param desiredDirection Desired direction
+   */
   void moveTo(const navigation::direction &desiredDirection) override final;
+
+  /**
+   * @brief moveTo Move to a desiredPose
+   * @param desiredDirection Desired pose
+   */
+  void moveTo(const navigation::Pose &desPose);
 
 };
 } // end of namespace controllers
