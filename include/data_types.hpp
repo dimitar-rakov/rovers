@@ -33,7 +33,7 @@ struct Pose
   Position pos;
   orientation rot;
   friend bool operator ==(const Pose &lhs, const Pose &rhs){return lhs.pos==rhs.pos && lhs.rot==rhs.rot;}
-  friend bool operator !=(const Pose &lhs, const Pose &rhs){return lhs.pos!=rhs.pos || lhs.rot==rhs.rot;}
+  friend bool operator !=(const Pose &lhs, const Pose &rhs){return lhs.pos!=rhs.pos || lhs.rot!=rhs.rot;}
 };
 
 } // end of namespace controllers

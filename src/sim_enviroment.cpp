@@ -82,7 +82,7 @@ void SimEnviroment::runExtendedScenario(){
     else{
       map_ptr->setRoverPositionOnMap(initPose.pos, roverID);
       rovers_ptr[i]->roverController()->setInitPose(initPose);
-      navigation::direction direction = dataParser_ptr->readNextDirectionFromFile(inPathname_,inFilename_,i+1);
+      navigation::direction direction = (dataParser_ptr->readNextDirectionFromFile(inPathname_,inFilename_,i+1));
       if (!rovers_ptr[i]->isMoving() && direction!=' '){ //Calc new goal and move
         navigation::Pose new_goal = rovers_ptr[i]->roverController()->calcNewPose(direction);
         if (!map_ptr->isCellFree(new_goal.pos)){

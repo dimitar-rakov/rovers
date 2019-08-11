@@ -52,8 +52,6 @@ navigation::Pose Controller::calcNewPose(const navigation::direction &desDirecti
     default:
       break;
     }
-
-    break;
   default:
     break;
   }

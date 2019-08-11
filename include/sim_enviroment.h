@@ -9,8 +9,8 @@
 #include "data_parser.h"
 #include "map.h"
 #include "rover.h"
-#include "controllers/sim_controller.h"
 #include "mars_rover.h"
+#include "controllers/sim_controller.h"
 
 class SimEnviroment
 {

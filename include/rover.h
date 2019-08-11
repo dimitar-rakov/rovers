@@ -41,6 +41,8 @@ public:
 
   void moveTo(const navigation::Pose &desPose);
 
+  void moveTo(const navigation::direction &desiredDirection);
+
   inline bool isMoving(){return ptrController->motionStatus()==controllers::MOVING;}
 
   inline bool onGoal(){return ptrController->motionStatus()==controllers::ON_GOAL;}
