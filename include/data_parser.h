@@ -50,7 +50,7 @@ public:
    * @param filename Filename.txt
    * @return Initial position
    */
-  navigation::Position readInitPosFromFile(const std::string &pathname, const std::string &filename);
+  navigation::Position readRightCornerFromFile(const std::string &pathname, const std::string &filename);
 
   /**
    * @brief readInitPosFromFile Read initial position from file with destination adress pathname

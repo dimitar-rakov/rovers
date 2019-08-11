@@ -39,17 +39,35 @@ public:
    */
   virtual ~Rover();
 
-  /**
-   * @brief init Set initial Parameter has to be run once before Rover start
-   * @return true if successed
-   */
-   virtual bool init();
+  void moveTo(const navigation::Pose &desPose);
 
+  inline bool isMoving(){return ptrController->motionStatus()==controllers::MOVING;}
+
+  inline bool onGoal(){return ptrController->motionStatus()==controllers::ON_GOAL;}
+
+  inline bool init(const std::string &roverID, const std::string &pathname, const std::string &outputFilenameSuffix){
+    roverID_=roverID;
+    pathname_= pathname;
+    outputFilenameSuffix_ =outputFilenameSuffix;
+  }
+
+  const std::shared_ptr<controllers::Controller> roverController(){return ptrController;}
+
+protected:
   /// Rover ID
   std::string roverID_;
 
-  /// Pointer to rover controller. To  be defined in init()
-  std::unique_ptr<controllers::Controller> ptrController;
+  /// Rover name
+  std::string roverName_;
+
+  /// Directory path name
+  std::string pathname_;
+
+  /// File name
+  std::string outputFilenameSuffix_;
+
+  /// Pointer to rover controller.
+  std::shared_ptr<controllers::Controller> ptrController;
 
   /// Output Data logger.
   logger::Logger  logger_;

@@ -65,7 +65,7 @@ public:
    * @param initPose Initial pose
    * @return true if successed
    */
-  inline bool init(navigation::Pose initPose){msrPose_ = initPose;}
+  inline bool setInitPose(navigation::Pose initPose){msrPose_ = initPose;}
 
   /**
    * @brief msrPose Return current pose
@@ -103,6 +103,7 @@ public:
    * @param desiredDirection Desired pose
    */
   virtual void moveTo(const navigation::Pose &desPose);
+
 
  protected:
   /// Controller status

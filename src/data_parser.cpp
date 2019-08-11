@@ -38,7 +38,7 @@ void DataParser::readAllDataFromFile(const std::string &pathname, const std::str
   file.close();
 }
 
-navigation::Position DataParser::readInitPosFromFile(const std::string &pathname, const std::string &filename){
+navigation::Position DataParser::readRightCornerFromFile(const std::string &pathname, const std::string &filename){
   std::ifstream file;
 
   if (!checkDirectoryExist(pathname))

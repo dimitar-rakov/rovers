@@ -7,7 +7,7 @@ void Logger::writeDataToFile(const std::string &pathname, const std::string &fil
   std::ofstream file;
 
   if (!checkDirectoryExist(pathname))
-    throw "DataTransfer: Durectory does not exist.";
+    throw "DataTransfer: Directory does not exist.";
 
   file.open (pathname+separator()+filename, std::ios::app );
   if (!file)
@@ -15,4 +15,5 @@ void Logger::writeDataToFile(const std::string &pathname, const std::string &fil
   file << pose.pos.x<< " " <<pose.pos.y<< " " <<pose.rot<<"\n";
   file.close();
 }
+
 }
