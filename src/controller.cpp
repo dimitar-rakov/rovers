@@ -10,14 +10,6 @@ Controller::Controller(): controllerStatus_(READY), motionStatus_(ON_GOAL){}
 
 Controller::~Controller(){}
 
-static std::unique_ptr<Controller> Controller::create(cntr_type cntrType){
-  switch (cntrType) {
-  case DEFAULT: return std::make_unique<SimController>();
-    break;
-  }
-  throw "Controller: invalid controller type.";
-}
-
 void Controller::moveTo(const navigation::direction &desiredDirection){}
 
 void Controller::moveTo(const navigation::Pose &desPose){}
@@ -30,10 +22,10 @@ navigation::Pose Controller::calcNewPose(const navigation::direction &desDirecti
 
   switch (desDirection) {
   case 'L': // ccw
-    newPose.rot = (itRot >0)? navigation::ALL_ORIENTATION[index-1] : navigation::ALL_ORIENTATION.back() ;
+    newPose.rot = (index >0)? navigation::ALL_ORIENTATION[index-1] : navigation::ALL_ORIENTATION.back() ;
     return newPose;
   case 'R': // cw
-    newPose.rot = (itRot >0)? navigation::ALL_ORIENTATION[index-1] : navigation::ALL_ORIENTATION.back() ;
+    newPose.rot = (index < (navigation::ALL_ORIENTATION.size()-1))? navigation::ALL_ORIENTATION[index+1] : navigation::ALL_ORIENTATION.front() ;
     return newPose;
   case 'M':
     switch (navigation::ALL_ORIENTATION[index]) {

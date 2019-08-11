@@ -3,7 +3,6 @@
 #include "data_types.hpp"
 #include "memory"
 
-
 namespace controllers
 {
 
@@ -51,14 +50,6 @@ public:
    * @brief ~Controller Virtual destructor
    */
   virtual ~Controller();
-
-  /**
-   * @brief create Factory create method
-   * @param cntrType Controller type
-   * @return
-   */
-  static std::unique_ptr<Controller> create(cntr_type cntrType);
-
 
   /**
    * @brief init Set initial Parameter has to be run once before controller start

@@ -4,7 +4,7 @@ namespace logger
 Logger::Logger(){}
 
 void Logger::writeDataToFile(const std::string &pathname, const std::string &filename, navigation::Pose pose){
-  std::ofstream file;
+  std::fstream file;
 
   if (!checkDirectoryExist(pathname))
     throw "DataTransfer: Directory does not exist.";
