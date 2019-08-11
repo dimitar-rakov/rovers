@@ -10,7 +10,6 @@
 #include "map.h"
 #include "rover.h"
 #include "mars_rover.h"
-#include "controllers/sim_controller.h"
 
 class SimEnviroment
 {

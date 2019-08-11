@@ -3,6 +3,7 @@
 #include "data_types.hpp"
 #include "memory"
 
+
 namespace controllers
 {
 
@@ -51,6 +52,7 @@ public:
    */
   virtual ~Controller();
 
+
   /**
    * @brief init Set initial Parameter has to be run once before controller start
    * @param initPose Initial pose
@@ -79,7 +81,7 @@ public:
   /**
    * @brief calcNewPose Calculate a new pose
    * @param desDirection Desired direction
-   * @return New pose
+   * @return Desired direction
    */
   navigation::Pose calcNewPose(const navigation::direction &desDirection);
 

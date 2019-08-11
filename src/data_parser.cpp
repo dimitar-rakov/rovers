@@ -14,12 +14,11 @@ void DataParser::readAllDataFromFile(const std::string &pathname, const std::str
 navigation::Position DataParser::readRightCornerFromFile(const std::string &pathname, const std::string &filename){
   std::ifstream file;
 
-  if (!checkDirectoryExist(pathname))
-    throw "DataTransfer: Durectory does not exist.";
-
   file.open (pathname+separator()+filename, std::ios::in);
-  if (!file)
+  if (!file){
+    /**  \todo {Discuse wit TTTech } **/
     throw "DataTransfer: Input file cannot be open.";
+  }
 
   std::string str;
   std::getline(file, str);
@@ -30,14 +29,12 @@ navigation::Position DataParser::readRightCornerFromFile(const std::string &path
 }
 
 void DataParser::readInitPosesFromFile(const std::string &pathname,const std::string &filename){
-
   std::ifstream file;
-  if (!checkDirectoryExist(pathname))
-    throw "DataTransfer: Durectory does not exist.";
-
   file.open (pathname+separator()+filename, std::ios::in);
-  if (!file)
+  if (!file){
+    /**  \todo {Discuse wit TTTech } **/
     throw "DataTransfer: Input file cannot be open.";
+  }
 
   std::string str;
   int cnt =0;
@@ -54,14 +51,12 @@ void DataParser::readInitPosesFromFile(const std::string &pathname,const std::st
 }
 
 void DataParser::readDirectionsFromFile(const std::string &pathname, const std::string &filename){
-
   std::ifstream file;
-  if (!checkDirectoryExist(pathname))
-    throw "DataTransfer: Durectory does not exist.";
-
   file.open (pathname+separator()+filename, std::ios::in);
-  if (!file)
+  if (!file){
+    /**  \todo {Discuse wit TTTech } **/
     throw "DataTransfer: Input file cannot be open.";
+  }
 
   std::string str;
   int cnt =0;
@@ -83,13 +78,11 @@ navigation::direction DataParser::readNextDirectionFromFile(const std::string &p
                                                             const std::string &filename,
                                                             size_t roverNum){
   std::ifstream file;
-  if (!checkDirectoryExist(pathname))
-    throw "DataTransfer: Durectory does not exist.";
-
   file.open (pathname+separator()+filename, std::ios::in);
-  if (!file)
+  if (!file){
+    /**  \todo {Discuse wit TTTech } **/
     throw "DataTransfer: Input file cannot be open.";
-
+  }
   std::string str;
   int cnt =0;
   while (std::getline(file, str))
@@ -102,7 +95,6 @@ navigation::direction DataParser::readNextDirectionFromFile(const std::string &p
         }
         else
           return ' ';
-
       }
       cnt++;
     }

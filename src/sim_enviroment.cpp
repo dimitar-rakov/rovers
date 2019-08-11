@@ -3,9 +3,9 @@
 SimEnviroment::SimEnviroment(std::string inPathname, std::string inFilename,
                              std::string outPathname, std::string outFilenameSuffix)
   :inPathname_(inPathname),
-   inFilename_(inFilename),
-   outPathname_(outPathname),
-   outFilenameSuffix_(outFilenameSuffix)
+    inFilename_(inFilename),
+    outPathname_(outPathname),
+    outFilenameSuffix_(outFilenameSuffix)
 
 
 {
@@ -14,7 +14,7 @@ SimEnviroment::SimEnviroment(std::string inPathname, std::string inFilename,
 }
 
 void SimEnviroment::runSimpleScenario(){
-   // Init map corners
+  // Init map corners
   navigation::Position leftCorner(0,0);
   navigation::Position rightCorner = dataParser_ptr->readRightCornerFromFile(inPathname_,inFilename_);
   map_ptr->initCorners(leftCorner, rightCorner);
@@ -32,6 +32,7 @@ void SimEnviroment::runSimpleScenario(){
     rovers_ptr[i]->init(roverID,outPathname_, outFilenameSuffix_ );
     navigation::Pose initPose= dataParser_ptr->roversInitPoses()[i];
     if (!map_ptr->isCellFree(initPose.pos)){
+      std::cout<< "\nCell is occupied. Rover"<<i+1 <<" stops";
       /**  \todo {logic by cell occupied } **/
     }
     else{
@@ -43,6 +44,7 @@ void SimEnviroment::runSimpleScenario(){
           navigation::Pose new_goal = rovers_ptr[i]->roverController()->calcNewPose(direction);
           navigation::Position  currPos = rovers_ptr[i]->roverController()->msrPose().pos;
           if (new_goal.pos !=currPos && !map_ptr->isCellFree(new_goal.pos)){
+            std::cout<< "\nCell is occupied. Rover"<<i+1 <<" stops";
             /**  \todo {logic by cell occupied } **/
             break;
           }
@@ -50,11 +52,11 @@ void SimEnviroment::runSimpleScenario(){
             rovers_ptr[i]->moveTo(new_goal);
           if (rovers_ptr[i]->onGoal())
             map_ptr->setRoverPositionOnMap(rovers_ptr[i]->roverController()->msrPose().pos, roverID);
-
         }
       }
     }
   }
+    std::cout << "\nrunSimpleScenario finish\n";
 }
 
 
@@ -64,10 +66,12 @@ void SimEnviroment::runExtendedScenario(){
   navigation::Position rightCorner = dataParser_ptr->readRightCornerFromFile(inPathname_,inFilename_);
   map_ptr->initCorners(leftCorner, rightCorner);
 
+
   dataParser_ptr->readAllDataFromFile(inPathname_,inFilename_);
 
   // Init rovers size
   rovers_ptr.resize(dataParser_ptr->roversInitPoses().size());
+
 
   //Place all rovers
   for (size_t i=0; i<rovers_ptr.size(); i++){
@@ -79,24 +83,31 @@ void SimEnviroment::runExtendedScenario(){
 
 
     if (!map_ptr->isCellFree(initPose.pos)){
+      std::cout<< "\nCell is occupied. Rover"<<i+1 <<" stops";
       /**  \todo {logic by cell occupied } **/
     }
     else{
       map_ptr->setRoverPositionOnMap(initPose.pos, roverID);
       rovers_ptr[i]->roverController()->setInitPose(initPose);
-      navigation::direction direction = (dataParser_ptr->readNextDirectionFromFile(inPathname_,inFilename_,i+1));
-      if (!rovers_ptr[i]->isMoving() && direction!=' '){ //Calc new goal and move
-        navigation::Pose new_goal = rovers_ptr[i]->roverController()->calcNewPose(direction);
-        navigation::Position  currPos = rovers_ptr[i]->roverController()->msrPose().pos;
-        if (new_goal.pos !=currPos && !map_ptr->isCellFree(new_goal.pos)){
-          /**  \todo {logic by cell occupied } **/
-          break;
+      navigation::direction direction;
+      do {
+        direction = (dataParser_ptr->readNextDirectionFromFile(inPathname_,inFilename_,i+1));
+        if (!rovers_ptr[i]->isMoving() && direction!=' '){ //Calc new goal and move
+          navigation::Pose new_goal = rovers_ptr[i]->roverController()->calcNewPose(direction);
+          navigation::Position  currPos = rovers_ptr[i]->roverController()->msrPose().pos;
+          if (new_goal.pos !=currPos && !map_ptr->isCellFree(new_goal.pos)){
+            std::cout<< "\nCell is occupied. Rover"<<i+1 <<" stops";
+            /**  \todo {logic by cell occupied } **/
+            break;
+          }
+          else
+            rovers_ptr[i]->moveTo(new_goal);
+          if (rovers_ptr[i]->onGoal())
+            map_ptr->setRoverPositionOnMap(rovers_ptr[i]->roverController()->msrPose().pos, roverID);
         }
-        else
-          rovers_ptr[i]->moveTo(new_goal);
-        if (rovers_ptr[i]->onGoal())
-          map_ptr->setRoverPositionOnMap(rovers_ptr[i]->roverController()->msrPose().pos, roverID);
-      }
+      } while (direction!=' ');
+
     }
   }
+  std::cout << "\nrunExtendedScenario finish\n";
 }

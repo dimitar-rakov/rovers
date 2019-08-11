@@ -1,7 +1,5 @@
 #include "controllers/controller.h"
-#include "controllers/sim_controller.h"
 #include <algorithm>
-#include <iostream>
 namespace controllers
 {
 

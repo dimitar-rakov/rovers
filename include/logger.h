@@ -23,6 +23,7 @@ public:
    * @param pose
    */
   void writeDataToFile(const std::string &pathname, const std::string &filename, navigation::Pose pose);
+
 };
 }
 #endif // LOGGER_H
