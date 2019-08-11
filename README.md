@@ -2,7 +2,7 @@
 
 ## Overview
 
-This package contains an implementation of small simulation related to Mars rovers 
+This package contains an implementation of small simulation related to Mars rovers .
 
 
 ## Dependencies
@@ -10,7 +10,7 @@ gtest, CMake minimum_required VERSION 3.5
 
 
 ## Bulid
-Open a terminal in project directory and use the following commands:
+Open a terminal within project directory and use the following commands:
 
 - `mkdir build`
 
@@ -22,19 +22,16 @@ Open a terminal in project directory and use the following commands:
 
 ## Usage
 
-Open a terminal fromthe build directory and execute the exe:
+Open a terminal within the build directory and execute the exe:
 - `./Rovers your_path_to_input_data in_filename out filename` 
 
-an example for input parameters
+an example with some input parameters
 
 - `./Rovers /home/dimitar nav_input_data.txt _nav_output_data.txt`
 
-## Gtests
+## GTest
 
-Open a terminal from the test directory and execute the exe:
-- `./Rovers your_path_to_input_data in_filename out filename` 
-
-an example for input parameters
+Open a terminal within the test directory and execute the exe:
 
 - `./Rovers_tests `
 
