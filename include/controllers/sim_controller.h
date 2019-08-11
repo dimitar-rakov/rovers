@@ -8,12 +8,12 @@ class SimController : public Controller
 {
 public:
   /**
-   * @brief SimController Default constructor   \todo {Make check for Rule of 5}
+   * @brief SimController Default constructor
    */
   SimController();
 
   /**
-   * @brief ~SimController Virtual destructor  \todo {Make check for Rule of 5}
+   * @brief ~SimController Virtual destructor
    */
   virtual ~SimController();
 

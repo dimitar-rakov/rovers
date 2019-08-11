@@ -16,7 +16,7 @@ public:
 
   /// Upper right corner of the grid map
   navigation::Position upperRightCorner_;
-  std::array<std::array<bool, 100>, 100> grid_;
+  std::array<std::array<bool, 100>, 100> grid_; // predefined max size 100x100
   std::map<std::string, navigation::Position> roversPositions_;
 
 

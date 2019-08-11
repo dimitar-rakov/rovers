@@ -23,12 +23,6 @@ public:
    * @param pose
    */
   void writeDataToFile(const std::string &pathname, const std::string &filename, navigation::Pose pose);
-
-  /**
-   * @brief writeDataToFile Write navigation data to a file defined von pathname_ and filename_
-   * @param pose
-   */
-  void writeDataToFile(navigation::Pose pose);
 };
 }
 #endif // LOGGER_H

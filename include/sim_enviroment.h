@@ -15,9 +15,25 @@
 class SimEnviroment
 {
 public:
+  /**
+   * @brief SimEnviroment Init constructor
+   * @param inPathname Input data directory pathname
+   * @param inFilename Input data filename
+   * @param outPathname Output data directory pathname
+   * @param outFilenameSuffix Output data filename suffix
+   */
   SimEnviroment(std::string inPathname, std::string inFilename,
                 std::string outPathname, std::string outFilenameSuffix);
-  void run();
+
+  /**
+   * @brief runSimpleScenario Running a simple scenario
+   */
+  void runSimpleScenario();
+
+  /**
+   * @brief runExtendedScenario Running an extended scenario
+   */
+  void runExtendedScenario();
 
   /// Data parser pointer
   std::unique_ptr<data_parser::DataParser> dataParser_ptr;

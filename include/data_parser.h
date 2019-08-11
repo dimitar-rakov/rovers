@@ -53,14 +53,25 @@ public:
   navigation::Position readRightCornerFromFile(const std::string &pathname, const std::string &filename);
 
   /**
-   * @brief readInitPosFromFile Read initial position from file with destination adress pathname
+   * @brief readInitPoseFromFile Read initial pose from file with destination adress pathname
    * @param pathname Directory Pathname
    * @param filename Filename.txt
-   * @param roverNumber Number of rover, which direction is going to be extracted
    */
-  std::vector <navigation::direction> readDirectionFromFile(const std::string &pathname,
-                                                            const std::string &filename,
-                                                            size_t roverNumber);
+  void readInitPosesFromFile(const std::string &pathname,const std::string &filename);
+
+  /**
+   * @brief readDirectionFromFile Read directions from file with destination adress pathname
+   * @param pathname Directory Pathname
+   * @param filename Filename.txt
+   */
+  void readDirectionsFromFile(const std::string &pathname,const std::string &filename);
+
+  /**
+   * @brief readDirectionFromFile Read directions from file with destination adress pathname
+   * @param pathname Directory Pathname
+   * @param filename Filename.txt
+   */
+  navigation::direction readNextDirectionFromFile(const std::string &pathname, const std::string &filename,size_t roverNum);
 
   /**
    * @brief upperRightCornerCoord Return upper right corner coordinates
@@ -90,6 +101,9 @@ private:
 
   /// Rovers directions sequences
   std::vector <std::vector <navigation::direction>> roversDirSequences_;
+
+  /// Rovers current direction sequences index
+  std::vector <int> currRoverDirSequenceIndex_;
 };
 }
 
