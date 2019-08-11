@@ -6,6 +6,8 @@
 #include "data_types.hpp"
 #include "helpers.h"
 
+namespace logger
+{
 class Logger
 {
 public:
@@ -21,5 +23,5 @@ public:
   void writeDataToFile(const std::string &pathname, const std::string &filename, navigation::Pose pose);
 
 };
-
+}
 #endif // LOGGER_H

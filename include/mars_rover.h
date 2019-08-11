@@ -2,6 +2,8 @@
 #define MARS_ROVER_H
 #include "rover.h"
 
+namespace rover
+{
 class MarsRover : public Rover
 {
 public:
@@ -19,5 +21,5 @@ public:
   bool init() override final;
 
 };
-
+}
 #endif // MARS_ROVER_H

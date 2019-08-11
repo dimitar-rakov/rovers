@@ -1,5 +1,7 @@
 #include "map.h"
 
+namespace nav_map
+{
 Map::Map(){}
 
 void Map::setRoverPositionOnMap(navigation::Position roverPos, std::string roverID){
@@ -8,4 +10,5 @@ void Map::setRoverPositionOnMap(navigation::Position roverPos, std::string rover
     roversPositions_[roverID] = roverPos;
   }
 
+}
 }

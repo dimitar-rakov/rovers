@@ -1,8 +1,10 @@
 #ifndef ROVER_H
 #define ROVER_H
 #include "controllers/controller.h"
-#include "data_parser.h"
+#include "logger.h"
 
+namespace rover
+{
 class Rover
 {
 public:
@@ -47,12 +49,12 @@ public:
   std::string roverID_;
 
   /// Pointer to rover controller. To  be defined in init()
-  std::unique_ptr<controllers::Controller>  ptrController;
+  std::unique_ptr<controllers::Controller> ptrController;
 
-  /// Data parser.
-  DataParser  dataParser_;
+  /// Output Data logger.
+  logger::Logger  logger_;
 
 
 };
-
+}
 #endif // ROVER_H

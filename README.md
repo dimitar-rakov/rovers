@@ -1,2 +1,2 @@
 # rovers
-Mars rovers
+Mars rovers simulation

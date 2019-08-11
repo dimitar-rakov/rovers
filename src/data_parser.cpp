@@ -1,9 +1,11 @@
 #include "data_parser.h"
 #include <iostream>
 
+namespace data_parser
+{
 DataParser::DataParser(){}
 
-void DataParser::readDataFromFile(const std::string &pathname, const std::string &filename){
+void DataParser::readAllDataFromFile(const std::string &pathname, const std::string &filename){
   std::ifstream file;
   if (!checkDirectoryExist(pathname))
     throw "DataTransfer: Durectory does not exist.";
@@ -34,6 +36,22 @@ void DataParser::readDataFromFile(const std::string &pathname, const std::string
     cnt++;
   }
   file.close();
+}
 
+navigation::Position DataParser::readInitPosFromFile(const std::string &pathname, const std::string &filename){
+  std::ifstream file;
 
+  if (!checkDirectoryExist(pathname))
+    throw "DataTransfer: Durectory does not exist.";
+
+  file.open (pathname+separator()+filename, std::ios::in);
+  if (!file)
+    throw "DataTransfer: Input file cannot be open.";
+
+  std::string str;
+  std::getline(file, str);
+   navigation::Position pos(std::stoi(str.substr(0,1)), std::stoi(str.substr(2,1)));
+  return pos;
+
+}
 }

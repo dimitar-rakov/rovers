@@ -6,6 +6,8 @@
 #include "data_types.hpp"
 #include "helpers.h"
 
+namespace data_parser
+{
 class DataParser
 {
 public:
@@ -36,10 +38,29 @@ public:
    DataParser& operator=(DataParser&& parser)=delete;
 
   /**
-   * @brief readDataFromFile Read navigation data from file with destination adress destFileName
-   * @param destFileName
+   * @brief readAllDataFromFile Read all navigation data from file with destination adress pathname
+   * @param pathname Directory Pathname
+   * @param filename Filename.txt
    */
-  void readDataFromFile(const std::string &pathname, const std::string &filename);
+  void readAllDataFromFile(const std::string &pathname, const std::string &filename);
+
+  /**
+   * @brief readInitPosFromFile Read initial position from file with destination adress pathname
+   * @param pathname Directory Pathname
+   * @param filename Filename.txt
+   * @return Initial position
+   */
+  navigation::Position readInitPosFromFile(const std::string &pathname, const std::string &filename);
+
+  /**
+   * @brief readInitPosFromFile Read initial position from file with destination adress pathname
+   * @param pathname Directory Pathname
+   * @param filename Filename.txt
+   * @param roverNumber Number of rover, which direction is going to be extracted
+   */
+  std::vector <navigation::direction> readDirectionFromFile(const std::string &pathname,
+                                                            const std::string &filename,
+                                                            size_t roverNumber);
 
   /**
    * @brief upperRightCornerCoord Return upper right corner coordinates
@@ -70,5 +91,6 @@ private:
   /// Rovers directions sequences
   std::vector <std::vector <navigation::direction>> roversDirSequences_;
 };
+}
 
 #endif // DATA_PARSER
