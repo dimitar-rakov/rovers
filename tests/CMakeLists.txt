@@ -6,6 +6,8 @@ enable_testing()
 find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
 
-add_executable(${PROJECT_NAME} unit_tests.cpp)
+file(GLOB SOURCES "./src/*.cpp")
+
+add_executable(${PROJECT_NAME} unit_tests.cpp ${SOURCES})
 target_include_directories(${PROJECT_NAME} PRIVATE ${GTEST_INCLUDE_DIR} ../include)
-target_link_libraries(${PROJECT_NAME} PRIVATE gtest pthread)
+target_link_libraries(${PROJECT_NAME} PRIVATE gtest pthread rov_lib)
